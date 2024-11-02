@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcademiHub - Share Academic Excellence</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --secondary: #818cf8;
+            --dark: #1f2937;
+            --light: #f8fafc;
+            --sidebar-width: 280px;
+            --transition: all 0.3s ease;
+        }
+
+        /* Enhanced Login Form */
+        .login-container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4f46e5 0%, #818cf8 100%);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .login-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 420px;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .login-form:hover {
+            transform: translateY(-5px);
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .login-btn:hover {
+            background: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        /* Enhanced Dashboard Layout */
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+            background: #f3f4f6;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            color: var(--dark);
+            position: fixed;
+            height: 100vh;
+            padding: 2rem 1.5rem;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .menu-item {
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            color: #4b5563;
+        }
+
+        .menu-item i {
+            margin-right: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .menu-item:hover {
+            background: #f3f4f6;
+            color: var(--primary);
+        }
+
+        .menu-item.active {
+            background: #f3f4f6;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        /* Enhanced Section Styles */
+        .content-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #f3f4f6;
+            color: var(--dark);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .back-button i {
+            margin-right: 0.5rem;
+        }
+
+        .back-button:hover {
+            background: #e5e7eb;
+        }
+
+        /* Enhanced Selection Options */
+        .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .selection-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .selection-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .selection-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Notes List Styling */
+        .notes-list {
+            margin-top: 1.5rem;
+        }
+
+        .note-item {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .note-item:hover {
+            transform: translateX(5px);
+            background: #f3f4f6;
+        }
+
+        .note-info {
+            flex-grow: 1;
+        }
+
+        .note-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .note-meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .note-rating {
+            display: flex;
+            align-items: center;
+            color: #facc15;
+        }
+
+        .note-rating i {
+            margin-right: 0.25rem;
+        }
+
+        .download-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .download-btn:hover {
+            background: #4338ca;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <form class="login-form" id="loginForm">
+            <h2>Welcome to AcademiHub</h2>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="Enter your password">
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+    </div>
+
+    <div class="dashboard" id="dashboard">
+        <div class="sidebar">
+            <div class="sidebar-logo">AcademiHub</div>
+            <div class="menu-item" data-section="education">
+                <i class="fas fa-graduation-cap"></i> Education
+            </div>
+            <div class="menu-item" data-section="papers">
+                <i class="fas fa-file-alt"></i> Previous Year Papers
+            </div>
+            <div class="menu-item" data-section="internships">
+                <i class="fas fa-briefcase"></i> Internships
+            </div>
+            <div class="menu-item" data-section="projects">
+                <i class="fas fa-project-diagram"></i> Projects
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="content-section" id="educationSection" style="display: none;">
+                <button class="back-button" id="educationBack" style="display: none;">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h2 class="section-title">Education Resources</h2>
+                <div id="degreeSelection" class="selection-grid">
+                    <!-- Degree options will be added here -->
+                </div>
+                <div id="yearSelection" class="selection-grid" style="display: none;"></div>
+                <div id="courseSelection" class="selection-grid" style="display: none;"></div>
+                <div id="notesList" class="notes-list" style="display: none;"></div>
+            </div>
+
+            <div class="content-section" id="papersSection" style="display: none;">
+                <button class="back-button" id="papersBack" style="display: none;">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h2 class="section-title">Previous Year Papers</h2>
+                <div id="papersDegreeSelection" class="selection-grid"></div>
+                <div id="papersYearSelection" class="selection-grid" style="display: none;"></div>
+                <div id="papersCourseSelection" class="selection-grid" style="display: none;"></div>
+                <div id="papersList" class="notes-list" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data structures for courses
+        const coursesByDegree = {
+            btech: ['Computer Science', 'Electronics and Communication', 'Electrical Engineering', 'Mechanical Engineering', 'Civil Engineering'],
+            mtech: ['Computer Science', 'Electronics and Communication', 'Electrical Engineering', 'Mechanical Engineering', 'Civil Engineering'],
+            msc: ['Chemistry', 'Mathematics', 'Physics']
+        };
+
+        const years = {
+            btech: 4,
+            mtech: 2,
+            msc: 2,
+            phd: 5
+        };
+
+        // Sample notes data
+        const sampleNotes = [
+            { title: "Digital Logic Design Notes", author: "John Doe", rating: 4.8, downloads: 234 },
+            { title: "Computer Architecture Complete Guide", author: "Jane Smith", rating: 4.5, downloads: 198 },
+            { title: "Operating Systems Handbook", author: "Mike Johnson", rating: 4.9, downloads: 345 }
+        ];
+
+        // Login handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        });
+
+        // Initialize education section
+        function initializeEducation() {
+            const degreeSelection = document.getElementById('degreeSelection');
+            degreeSelection.innerHTML = Object.keys(coursesByDegree).map(degree => `
+                <div class="selection-card" data-degree="${degree}">
+                    <h3>${degree.toUpperCase()}</h3>
+                    <p>${years[degree]} years program</p>
+                </div>
+            `).join('');
+
+            // Add click handlers
+            degreeSelection.querySelectorAll('.selection-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const degree = this.dataset.degree;
+                    showYearSelection(degree);
+                });
+            });
+        }
+
+        // Show year selection
+        function showYearSelection(degree) {
+            document.getElementById('degreeSelection').style.display = 'none';
+            document.getElementById('yearSelection').style.display = 'grid';
+            document.getElementById('educationBack').style.display = 'inline-flex';
+
+            const yearSelection = document.getElementById('yearSelection');
+            yearSelection.innerHTML = Array.from({length: years[degree]}, (_, i) => `
+                <div class="selection-card" data-year="${i + 1}">
+                    <h3>Year ${i + 1}</h3>
+                    <p>Select to view courses</p>
+                </div>
+            `).join('');
+
+            yearSelection.querySelectorAll('.selection-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    showCourseSelection(degree, this.dataset.year);
+                });
+            });
+        }
+
+        // Show course selection
+        function showCourseSelection(degree, year) {
+            document.getElementById('yearSelection').style.display = 'none';
+            document.getElementById('courseSelection').style.display = 'grid';
+
+            const courseSelection = document.getElementById('courseSelection');
+            courseSelection.innerHTML = coursesByDegree[degree].map(course => `
+                <div class="selection-card" data-course="${course}">
+                    <h3>${course}</h3>
+                    <p>View study materials</p>
+                </div>
+            `).join('');
+
+            courseSelection.querySelectorAll('.selection-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    showNotes(degree, year, this.dataset.course);
+                });
+            });
+        }
+
+        // Show notes
+        function showNotes(degree, year, course) {
+            document.getElementById('courseSelection').style.display = 'none';
+            document.getElementById('notesList').style.display = 'block';
+
+            const notesList = document.
